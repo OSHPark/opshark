@@ -1,0 +1,4 @@
+*.b#?
+*.s#?
+.git_amend_data
+gerber-files/
