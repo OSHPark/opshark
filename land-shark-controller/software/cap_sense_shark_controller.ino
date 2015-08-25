@@ -1,7 +1,7 @@
 #define pinUp    15
-#define pinLeft  18
+#define pinLeft  17
 #define pinRight 16
-#define pinDown  17
+#define pinDown  18
 #define pinBite  19
 #define pinDance 22
 
