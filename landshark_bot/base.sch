@@ -14,8 +14,8 @@
 <layer number="18" name="Vias" color="2" fill="1" visible="no" active="no"/>
 <layer number="19" name="Unrouted" color="6" fill="1" visible="no" active="no"/>
 <layer number="20" name="Dimension" color="15" fill="1" visible="no" active="no"/>
-<layer number="21" name="tPlace" color="7" fill="1" visible="no" active="no"/>
-<layer number="22" name="bPlace" color="7" fill="1" visible="no" active="no"/>
+<layer number="21" name="tPlace" color="16" fill="1" visible="no" active="no"/>
+<layer number="22" name="bPlace" color="14" fill="1" visible="no" active="no"/>
 <layer number="23" name="tOrigins" color="15" fill="1" visible="no" active="no"/>
 <layer number="24" name="bOrigins" color="15" fill="1" visible="no" active="no"/>
 <layer number="25" name="tNames" color="7" fill="1" visible="no" active="no"/>
@@ -44,7 +44,7 @@
 <layer number="48" name="Document" color="7" fill="1" visible="no" active="no"/>
 <layer number="49" name="Reference" color="7" fill="1" visible="no" active="no"/>
 <layer number="50" name="dxf" color="7" fill="1" visible="no" active="no"/>
-<layer number="51" name="tDocu" color="7" fill="1" visible="no" active="no"/>
+<layer number="51" name="tDocu" color="6" fill="1" visible="no" active="no"/>
 <layer number="52" name="bDocu" color="7" fill="1" visible="no" active="no"/>
 <layer number="53" name="tGND_GNDA" color="7" fill="9" visible="no" active="no"/>
 <layer number="54" name="bGND_GNDA" color="1" fill="9" visible="no" active="no"/>
@@ -1072,6 +1072,37 @@ High-power, low thermal resistance package.</description>
 <rectangle x1="-0.2286" y1="0.7112" x2="0.2286" y2="1.2954" layer="51"/>
 <rectangle x1="0.7112" y1="-1.2954" x2="1.1684" y2="-0.7112" layer="51"/>
 <rectangle x1="-1.1684" y1="-1.2954" x2="-0.7112" y2="-0.7112" layer="51"/>
+</package>
+<package name="BUTTON-PJRC">
+<smd name="B1" x="-2.54" y="1.016" dx="1.27" dy="0.762" layer="1"/>
+<smd name="B2" x="2.54" y="1.016" dx="1.27" dy="0.762" layer="1"/>
+<smd name="A2" x="2.54" y="-1.016" dx="1.27" dy="0.762" layer="1"/>
+<smd name="A1" x="-2.54" y="-1.016" dx="1.27" dy="0.762" layer="1"/>
+<wire x1="2.032" y1="1.27" x2="2.54" y2="1.27" width="0.127" layer="51"/>
+<wire x1="2.032" y1="-1.27" x2="2.54" y2="-1.27" width="0.127" layer="51"/>
+<wire x1="2.54" y1="-1.27" x2="2.54" y2="-0.762" width="0.127" layer="51"/>
+<wire x1="2.54" y1="-0.762" x2="2.032" y2="-0.762" width="0.127" layer="51"/>
+<wire x1="2.032" y1="0.762" x2="2.54" y2="0.762" width="0.127" layer="51"/>
+<wire x1="2.54" y1="0.762" x2="2.54" y2="1.27" width="0.127" layer="51"/>
+<wire x1="2.032" y1="1.397" x2="2.032" y2="-1.397" width="0.127" layer="51"/>
+<wire x1="2.032" y1="-1.397" x2="-2.032" y2="-1.397" width="0.127" layer="51"/>
+<wire x1="-2.032" y1="-1.397" x2="-2.032" y2="1.397" width="0.127" layer="51"/>
+<wire x1="-2.032" y1="1.397" x2="2.032" y2="1.397" width="0.127" layer="51"/>
+<circle x="0" y="0" radius="0.803215625" width="0.127" layer="51"/>
+<wire x1="-2.032" y1="-1.27" x2="-2.54" y2="-1.27" width="0.127" layer="51"/>
+<wire x1="-2.032" y1="1.27" x2="-2.54" y2="1.27" width="0.127" layer="51"/>
+<wire x1="-2.54" y1="1.27" x2="-2.54" y2="0.762" width="0.127" layer="51"/>
+<wire x1="-2.54" y1="0.762" x2="-2.032" y2="0.762" width="0.127" layer="51"/>
+<wire x1="-2.032" y1="-0.762" x2="-2.54" y2="-0.762" width="0.127" layer="51"/>
+<wire x1="-2.54" y1="-0.762" x2="-2.54" y2="-1.27" width="0.127" layer="51"/>
+<wire x1="-2.032" y1="-0.508" x2="-2.032" y2="0.254" width="0.127" layer="21"/>
+<wire x1="-2.032" y1="0.254" x2="-2.032" y2="0.508" width="0.127" layer="21"/>
+<wire x1="-1.8034" y1="1.397" x2="-0.889" y2="1.397" width="0.127" layer="21"/>
+<wire x1="-0.889" y1="1.397" x2="1.8034" y2="1.397" width="0.127" layer="21"/>
+<wire x1="2.032" y1="0.508" x2="2.032" y2="-0.508" width="0.127" layer="21"/>
+<wire x1="1.8034" y1="-1.397" x2="-1.8034" y2="-1.397" width="0.127" layer="21"/>
+<wire x1="-2.032" y1="0.254" x2="-0.889" y2="1.397" width="0.127" layer="21"/>
+<text x="0" y="-1.778" size="1.27" layer="21" rot="R180" align="bottom-center">&gt;NAME</text>
 </package>
 </packages>
 <symbols>
@@ -5028,6 +5059,15 @@ Standard 0603 ceramic capacitor, and 0.1" leaded capacitor.</description>
 <technology name=""/>
 </technologies>
 </device>
+<device name="PJRC" package="BUTTON-PJRC">
+<connects>
+<connect gate="G$1" pin="P$1" pad="A1 A2"/>
+<connect gate="G$1" pin="P$2" pad="B1 B2"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
 </devices>
 </deviceset>
 <deviceset name="RESISTOR" prefix="R" uservalue="yes">
@@ -8013,8 +8053,8 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="FTDI" library="SparkFun-Connectors" deviceset="M06" device="LOCK"/>
 <part name="X1" library="adafruit" deviceset="ESP-12" device=""/>
 <part name="UART_X" library="tekdemo" deviceset="UART_SWITCHER" device="0603"/>
-<part name="BTN_RST" library="tekdemo" deviceset="BUTTON" device="SMD_BUTTON"/>
-<part name="BTN_PROG" library="tekdemo" deviceset="BUTTON" device="SMD_BUTTON"/>
+<part name="BTN_RST" library="tekdemo" deviceset="BUTTON" device="PJRC" value="BUTTONPJRC"/>
+<part name="BTN_PROG" library="tekdemo" deviceset="BUTTON" device="PJRC" value="BUTTONPJRC"/>
 <part name="DRV_L" library="SparkFun-Connectors" deviceset="M03" device="LOCK"/>
 <part name="DRV_R" library="SparkFun-Connectors" deviceset="M03" device="LOCK"/>
 <part name="FIN_L" library="SparkFun-Connectors" deviceset="M03" device="LOCK"/>
