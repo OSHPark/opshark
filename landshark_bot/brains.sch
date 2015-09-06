@@ -7825,9 +7825,9 @@ will start in programming mode</text>
 <wire x1="360.68" y1="-15.24" x2="114.3" y2="-15.24" width="0.2032" layer="94"/>
 <text x="129.54" y="-12.7" size="1.778" layer="94">SERVOS AND MOTION</text>
 <wire x1="170.18" y1="60.96" x2="170.18" y2="-5.08" width="0.2032" layer="94"/>
-<wire x1="170.18" y1="-5.08" x2="360.68" y2="-5.08" width="0.2032" layer="94"/>
-<wire x1="360.68" y1="-5.08" x2="360.68" y2="60.96" width="0.2032" layer="94"/>
-<wire x1="360.68" y1="60.96" x2="170.18" y2="60.96" width="0.2032" layer="94"/>
+<wire x1="170.18" y1="-5.08" x2="248.92" y2="-5.08" width="0.2032" layer="94"/>
+<wire x1="248.92" y1="-5.08" x2="248.92" y2="60.96" width="0.2032" layer="94"/>
+<wire x1="248.92" y1="60.96" x2="170.18" y2="60.96" width="0.2032" layer="94"/>
 <text x="203.2" y="60.96" size="1.778" layer="94">BLINKELNIGHTS</text>
 <text x="-71.12" y="0" size="1.778" layer="91">OPTIMAL: 
 Auto-voltage selection. 
@@ -7847,8 +7847,8 @@ https://github.com/adafruit/USB-DC-Solar-Lithium-Ion-Polymer-charger</text>
 <text x="-109.22" y="-35.56" size="1.778" layer="91" rot="R90">FROM FTDI HEADER
 IN BOOTLOADER 
 SECTION</text>
-<text x="198.12" y="43.18" size="1.778" layer="91">located on chassis</text>
-<text x="116.84" y="68.58" size="1.778" layer="91">BYPASS CAPS LEFT OUT DUE TO ESP HAVING DEDICATED REGULAR,
+<text x="200.66" y="58.42" size="1.778" layer="91">located on chassis</text>
+<text x="116.84" y="68.58" size="1.778" layer="91">BYPASS CAPS LEFT OUT DUE TO ESP HAVING DEDICATED REGULATOR,
  CONVENIENTLY PLACED NEAR THE VCC PIN</text>
 </plain>
 <instances>
@@ -7865,7 +7865,7 @@ SECTION</text>
 <instance part="TAIL" gate="G$1" x="309.88" y="-27.94"/>
 <instance part="BITE" gate="G$1" x="342.9" y="-27.94"/>
 <instance part="VREG_3V" gate="G$1" x="33.02" y="-83.82"/>
-<instance part="WS_OUT" gate="G$1" x="350.52" y="33.02" rot="R180"/>
+<instance part="WS_OUT" gate="G$1" x="238.76" y="33.02" rot="R180"/>
 <instance part="LED" gate="G$1" x="10.16" y="-76.2"/>
 <instance part="R_LED" gate="G$1" x="10.16" y="-88.9" rot="R270"/>
 <instance part="IC_LIPO" gate="G$1" x="-33.02" y="-35.56"/>
@@ -7989,10 +7989,10 @@ SECTION</text>
 <junction x="170.18" y="-25.4"/>
 </segment>
 <segment>
-<label x="180.34" y="25.4" size="1.778" layer="95" rot="R180" xref="yes"/>
-<wire x1="180.34" y1="25.4" x2="342.9" y2="25.4" width="0.2032" layer="91"/>
+<label x="187.96" y="27.94" size="1.778" layer="95" rot="R180" xref="yes"/>
+<wire x1="187.96" y1="27.94" x2="231.14" y2="27.94" width="0.2032" layer="91"/>
 <pinref part="WS_OUT" gate="G$1" pin="3"/>
-<wire x1="342.9" y1="30.48" x2="342.9" y2="25.4" width="0.2032" layer="91"/>
+<wire x1="231.14" y1="30.48" x2="231.14" y2="27.94" width="0.2032" layer="91"/>
 </segment>
 <segment>
 <pinref part="FTDI" gate="G$1" pin="6"/>
@@ -8153,11 +8153,9 @@ SECTION</text>
 </net>
 <net name="BLINKY" class="0">
 <segment>
-<wire x1="200.66" y1="40.64" x2="195.58" y2="40.64" width="0.2032" layer="91"/>
-<label x="195.58" y="40.64" size="1.778" layer="95" rot="R180" xref="yes"/>
+<label x="187.96" y="33.02" size="1.778" layer="95" rot="R180" xref="yes"/>
 <pinref part="WS_OUT" gate="G$1" pin="2"/>
-<wire x1="342.9" y1="33.02" x2="200.66" y2="33.02" width="0.2032" layer="91"/>
-<wire x1="200.66" y1="33.02" x2="200.66" y2="40.64" width="0.2032" layer="91"/>
+<wire x1="231.14" y1="33.02" x2="187.96" y2="33.02" width="0.2032" layer="91"/>
 </segment>
 <segment>
 <wire x1="114.3" y1="86.36" x2="124.46" y2="86.36" width="0.2032" layer="91"/>
@@ -8201,10 +8199,10 @@ SECTION</text>
 <junction x="5.08" y="-22.86"/>
 </segment>
 <segment>
-<wire x1="180.34" y1="50.8" x2="342.9" y2="50.8" width="0.2032" layer="91"/>
-<label x="180.34" y="50.8" size="1.778" layer="95" rot="R180" xref="yes"/>
+<wire x1="187.96" y1="38.1" x2="231.14" y2="38.1" width="0.2032" layer="91"/>
+<label x="187.96" y="38.1" size="1.778" layer="95" rot="R180" xref="yes"/>
 <pinref part="WS_OUT" gate="G$1" pin="1"/>
-<wire x1="342.9" y1="35.56" x2="342.9" y2="50.8" width="0.2032" layer="91"/>
+<wire x1="231.14" y1="35.56" x2="231.14" y2="38.1" width="0.2032" layer="91"/>
 </segment>
 <segment>
 <label x="154.94" y="-33.02" size="1.778" layer="95" rot="R180" xref="yes"/>
