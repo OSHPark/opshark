@@ -58,7 +58,7 @@ class SPIController {
     /**
      * Return the raw bitfield, which is usable as an SPI response
      */
-    byte getBytecodes() {
+    byte read() {
       return _state;
     }
 
