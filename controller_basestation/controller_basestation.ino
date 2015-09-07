@@ -42,9 +42,9 @@ void callback(const MQTT::Publish& pub) {
 /*
   Create instances for all the controllers
 */
-Controller_I2C controller1(1);
-Controller_I2C controller2(2);
-Controller_I2C controller3(3);
+SPIController controller1(1);
+SPIController controller2(2);
+SPIController controller3(3);
 
 
 void setup()

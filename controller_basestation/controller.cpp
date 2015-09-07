@@ -18,13 +18,13 @@ struct ControllerState {
   byte misc;
 };
 
-class Controller_I2C {
+class SPIController {
   private:
     elapsedMillis  _lastUpdate;
     ControllerState  _state;
 
   public:
-    Controller_I2C(int address);
+    SPIController(int address);
 
     ControllerState read() {
       byte reply;
