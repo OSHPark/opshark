@@ -1,3 +1,4 @@
+
 /*
  Basic MQTT example
 
@@ -13,7 +14,9 @@
 #include <PubSubClient.h>
 #include <elapsedMillis.h>
 #include <Streaming.h>
-#include "controller.cpp"
+#include "controller.h"
+#include <SPI.h>
+
 
 /*
   Configure wifi and MQTT Server
@@ -42,15 +45,15 @@ void callback(const MQTT::Publish& pub) {
 /*
   Create instances for all the controllers
 */
-SPIController controller1(1);
-SPIController controller2(2);
-SPIController controller3(3);
+SPIController controller1(1,4);
+SPIController controller2(2,5);
+SPIController controller3(3,2);
 
 
 void setup()
 {
   // Setup console
-  Serial.begin(9600);
+  Serial.begin(115200);
   delay(10);
   Serial.println();
   Serial.println();
@@ -87,9 +90,19 @@ void loop()
 
   if (sender > 3000) {
     sender = 0;
+    
+    
+    
+    int c=controller1.readByte();
+    Serial.print("Controller status: ");
+    Serial.println(c);
+    
     String s=String(millis()) ;
     client.publish("/landshark/1/status",s );
     client.publish("/landshark/1/status",s );
+    
+    //Publish the controller data over the network to the particular shark
+    
 
   }
 

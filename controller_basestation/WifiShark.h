@@ -1,11 +1,11 @@
 #include <elapsedMillis.h>
 
-class Sharkbot{
+class WifiShark{
   private:
     elapsedMillis  _lastUpdate;
 
   public:
-    Sharkbot(int address);
+    WifiShark(int address);
     
     boolean write();
 
