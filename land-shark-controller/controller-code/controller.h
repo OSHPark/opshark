@@ -10,8 +10,6 @@
 #define LEFT 	3
 #define RIGHT 	2
 #define BITE 	1
-
-
 #define DANCE 	0
 
 /** Write down the pin positions for our capacitive sense buttons
