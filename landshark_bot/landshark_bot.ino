@@ -14,8 +14,8 @@
 #include <elapsedMillis.h>
 #include <Streaming.h>
 #include <Servo.h>
-#include "RemoteController.cpp"
-#include "sharkbot.cpp"
+#include "RemoteController.h"
+#include "SharkBot.h"
 
 
 const char *ssid =	"HOME-1972";		// cannot be longer than 32 characters!
@@ -32,7 +32,7 @@ RemoteController remote(1);
 
 
 //Create our physical sharkbot
-Sharkbot shark;
+Sharkbot shark(1);
 
 
 //Set up our input handling functions
@@ -125,8 +125,11 @@ void loop()
   //
   
   //If no one is around, do something reasonable and/or cool.
-  if(remote.isIdle()){
+  if(true || remote.isIdle()){
     shark.idle();
+  }
+  else{
+    shark.notidle();
   }
   
   
@@ -134,5 +137,12 @@ void loop()
   shark.update();
   
 
+  if(digitalRead(0)==LOW){
+     shark.disable();
+     while(1){
+       delay(200);
+       ESP.deepSleep(5000, WAKE_RF_DEFAULT);
+     }  
+   }
 }
 
