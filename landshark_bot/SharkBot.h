@@ -119,15 +119,19 @@ class Sharkbot {
         idleTail.start();
       }
 
-      driveright.write(0);
-      driveleft.write(0);
+      driveright.write(90);
+            yield();
+
+      driveleft.write(90);
     }
 
     void notidle() {
       idleFin.stop();
       idleFin.stop();
       leftfin.write(90);
+      yield();
       rightfin.write(90);
+      yield();
       tailfin.write(90);
 
     }
@@ -148,10 +152,10 @@ class Sharkbot {
 
       driveleft.mirror();
       driveleft.restrictMapped(80, 105);
-      driveleft.map(0, 180, -90, 90);
+      //driveleft.map(0, 180, -90, 90);
 
       driveright.restrictMapped(80, 105);
-      driveright.map(0, 180, -90, 90);
+      //driveright.map(0, 180, -90, 90);
 
       //add some shark specific tuning parameters
       if (address = 1) {
@@ -178,8 +182,12 @@ class Sharkbot {
       //For some reason they're backwards from the schematic... Use these values?
       bite.attach(4);
       tailfin.attach(5);
-      driveleft.attach(14);
-      driveright.attach(16);
+      
+      //also backward from schematic!?
+      //driveleft.attach(14);
+      //driveright.attach(16);
+      driveleft.attach(16);
+      driveright.attach(14);
 
       //These things have horrible startup glitches, so try to minimize it by writing right away
       leftfin.write(90);
@@ -196,88 +204,30 @@ class Sharkbot {
       notidle();
 
       if (control.up) {
-        //driveleft.write(driveleft.read() + 10);
-        //driveright.write(driveright.read() + 10);
-        driveleft.write(20);
-        driveright.write(20);
+        driveleft.write(90+20);
+        driveright.write(90+20);
         Serial.println("++");
       }
       else if (control.left) {
-        //driveleft.write(driveleft.read() - 5);
-        //driveright.write(driveright.read() + 10);
-        driveleft.write(5);
-        driveright.write(20);
+        driveleft.write(90+5);
+        driveright.write(90+20);
         Serial.println("+-");
       }
       else if (control.right) {
-        //driveleft.write(driveleft.read() + 10);
-        //driveright.write(driveright.read() - 5);
-        driveleft.write(20);
-        driveright.write(5);
+        driveleft.write(90+20);
+        driveright.write(90+5);
        Serial.println("-+");
       }
 
       else if (control.down) {
-        driveleft.write(-10);
-        driveright.write(-10);
+        driveleft.write(90-10);
+        driveright.write(90-10);
         
         
-        /*
-        //Brake if we're going forward
-        if (driveleft.read() > 0  || driveright.read() > 0) {
-          driveleft.write(0);
-          driveright.write(0);
-          Serial.println("XX");
-        }
-        //Otherwise, back up a bit
-        else {
-          driveleft.write(driveleft.read() - 1);
-          driveright.write(driveright.read() - 1);
-          Serial.println("--");
-        }
-        //*/
       }
       else { 
-          driveleft.write(0);
-          driveright.write(0);
-         /* 
-        //Straigten out and slow down
-        if ( driveleft.read() > driveright.read() ) {
-          driveleft.write(driveleft.read() - 1);
-          driveright.write(driveright.read() + 1);
-          Serial.println("+-");
-
-        }
-        else if (driveleft.read() < driveright.read() ) {
-          driveleft.write(driveleft.read() + 1) ;
-          driveright.write(driveright.read() - 1) ;
-          Serial.println("+-");
-        }
-        //else, equal, don't adjust them!
-
-        //slow doooown the left
-        if ( driveleft.read() > 0) {
-          driveleft.write(driveleft.read() - 2);
-          Serial.print("-");
-
-        }
-        else if (driveleft.read() < 0) {
-          driveleft.write(driveleft.read() + 2);
-          Serial.print("+");
-
-        }
-        //slooow down the right
-        if ( driveright.read() > 0) {
-          driveright.write(driveright.read() - 2);
-          Serial.println("-");
-
-        }
-        else if (driveright.read() < 0) {
-          driveright.write(driveright.read() + 2);
-          Serial.println("+");
-
-        }
-        */
+          driveleft.write(90+0);
+          driveright.write(90+0);
       }
 
 
@@ -314,9 +264,11 @@ class Sharkbot {
       biteAnimation.update();
       danceAnimation.update();
       
-      //Serial<<"L " <<  driveleft.read()  <<endl;
-      //Serial<<"R " <<  driveright.read()  <<endl;
-      //delay(50);
+      Serial<<"L " <<  driveleft.read()  <<endl;
+      Serial<<"R " <<  driveright.read()  <<endl;
+      
+      driveleft.offset(-20);
+      delay(2);
     }
 };
 

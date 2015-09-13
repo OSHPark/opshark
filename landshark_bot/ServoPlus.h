@@ -49,7 +49,7 @@ public:
 		position=constrain(position,_min,_max);
 		
         
-		//TODO: Ideally, this should write to microseconds to get better precision mapping.   
+		//TODO: Ideally, this should write to microseconds to get better precision mapping. 
 		servo.write(position);
 	}
 	
