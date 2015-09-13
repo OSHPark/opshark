@@ -22,8 +22,8 @@ AnimationStep idleFinsAnimation[10] = {
   {000, LINE, {80, 80}},
   {1000, LINE, {90, 90}},
   {2000, LINE, {80, 80}},
-
-  {2001, RESET, {85, 85}},
+  {5000, RESET, {85, 85}},
+  {3000, RESET, {85, 85}},
 };
 void idleFinsFunction(AnimationStep shark) {
   leftfin.write(shark.param[0]);
@@ -37,12 +37,42 @@ AnimationStep idleTailAnimation[10] = {
   {2000, LINE, {105}},
   {2500, LINE, {90}},
   {2501, RESET, {75}},
+  {3000, RESET, {75}},
 };
 
 void idleTailFunction(AnimationStep shark) {
   tailfin.write(shark.param[0]);
 }
 Animation idleTail(idleTailAnimation, idleTailFunction);
+
+//This function is oddly named due to existing things. Ugly, but works
+AnimationStep biteAnimationSequence[10] = {
+  {0, LINE, {90}},  //open mouth
+  {200, LINE, {45}},  //will be restarted and looped here
+  {100, LINE, {90}},  //End function by closing mouth
+};
+
+void biteFunction(AnimationStep shark) {
+  bite.write(shark.param[0]);
+}
+Animation biteAnimation(biteAnimationSequence, biteFunction);
+
+
+AnimationStep danceSequence[10] = {
+  {0, PAUSE, {0,90,45}},  //left fin down, right fin up, tail to left , 
+  {0, PAUSE, {90,0,135}},  //left fin down, right fin up, tail to left , 
+  {200, PAUSE, {45}},  //left fin up , right fin down, tail to right 
+
+};
+
+void danceFunction(AnimationStep shark) {
+  leftfin.write(shark.param[0]);
+  rightfin.write(shark.param[1]);
+  tailfin.write(shark.param[2]);
+
+  //update pixels with other stuff
+}
+Animation danceAnimation(danceSequence, danceFunction);
 
 
 
@@ -62,7 +92,7 @@ class Sharkbot {
 
     //Stuff to do if no one's providing input
     void disable() {
-       leftfin.detach();
+      leftfin.detach();
       rightfin.detach();
       //bite.attach(5);
       //tailfin.attach(4);
@@ -71,7 +101,7 @@ class Sharkbot {
       driveleft.detach();
       driveright.detach();
     }
-    
+
     void idle() {
       if (! idleFin.isEnabled()) {
         Serial.println("Starting Idle animations");
@@ -79,6 +109,7 @@ class Sharkbot {
         idleFin.start();
       }
       if (! idleTail.isEnabled()) {
+        Serial.println("Starting Idle animations");
         idleTail.reset();
         idleTail.start();
       }
@@ -96,49 +127,40 @@ class Sharkbot {
       //Step 1: Write out some safe limits so our servos don't destroy anything
       leftfin.mirror();
       leftfin.restrictMapped(80, 110);
-      
+
       rightfin.restrictMapped(80, 110);
-      
-      bite.restrict(90, 90); //currently not allowed to move
-      
-      tailfin.restrict(60,120);
+
+      bite.restrict(70,110); //currently not allowed to move
+
+      tailfin.restrict(60, 120);
 
       driveleft.restrict(85, 95);
       driveright.restrict(85, 95);
 
       //add some shark specific tuning parameters
-      if(address=1){
+      if (address = 1) {
         tailfin.offset(5);
       }
-      else if(address==2){
-        
+      else if (address == 2) {
+
       }
-      else if(address==3){
-        
+      else if (address == 3) {
+
       }
+
 
       //Now, power up the servos
       leftfin.attach(13);
-      delay(200);
       rightfin.attach(12);
-            delay(200);
 
       //Don't use these
       // // bite.attach(5);
       // // tailfin.attach(4);
       //For some reason they're backwards from the schematic... Use these values?
       bite.attach(4);
-      delay(200);
       tailfin.attach(5);
-      delay(200);
-
-      //temporarily disabled to prevent driving off the table
-      //driveleft.attach(14);
-      delay(200);
-
-      //driveright.attach(16);
-      delay(200);
-
+      driveleft.attach(14);
+      driveright.attach(16);
 
       //These things have horrible startup glitches, so try to minimize it by writing right away
       leftfin.write(90);
@@ -157,7 +179,80 @@ class Sharkbot {
     };
 
 
+    void manual(ControllerState control) {
+      //disable any ongoing idle animations
+      notidle();
 
+      if (control.up) {
+        driveleft.write(driveleft.read() + 1);
+        driveright.write(driveright.read() + 1);
+      }
+      else if (control.left) {
+        driveleft.write(driveleft.read() - 1);
+        driveright.write(driveright.read() + 1);
+      }
+      else if (control.right) {
+        driveleft.write(driveleft.read() + 1);
+        driveright.write(driveright.read() - 1);
+      }
+      else if (control.down) {
+        driveleft.write(driveleft.read() - 1);
+        driveright.write(driveright.read() - 1);
+      }
+      else { //Straigten out and slow down
+
+        if ( driveleft.read() > driveright.read() ) {
+          driveleft.write(driveleft.read() - 1);
+          driveleft.write(driveright.read() + 1);
+        }
+
+        else if (driveleft.read() < driveright.read() ) {
+          driveleft.write(driveleft.read() + 1) ;
+          driveleft.write(driveright.read() - 1) ;
+        }
+        //else, equal, do nothing!
+
+        //slow doooown the left
+        if ( driveleft.read() > 0) {
+          driveleft.write(driveleft.read() - 2);
+        }
+        else if (driveleft.read() < 0) {
+          driveleft.write(driveleft.read() + 1);
+
+        }
+
+        //slooow down the right
+        if ( driveright.read() > 0) {
+          driveright.write(driveright.read() - 2);
+        }
+        else if (driveright.read() < 0) {
+          driveright.write(driveright.read() + 1);
+
+        }
+      }
+
+
+
+      //BITE
+      if ( bite.read() > 0) {
+        //This one will hold the mouth open until you let go
+        biteAnimation.reset();
+        biteAnimation.start();
+      }
+      //DANCE PARTY
+      if ( driveright.read() > 0) {
+        //This will only do a dance if it's not happening
+        if (danceAnimation.isEnabled() ) {
+          danceAnimation.start();
+          danceAnimation.reset();
+        }
+      }
+
+
+      // This delay and button update speed on the controller will determine how fast the
+      // accelleration profiles change
+      delay(50);
+    }
 
 
 
@@ -167,24 +262,13 @@ class Sharkbot {
       //those animations will simply do nothing.
       idleFin.update();
       idleTail.update();
+      biteAnimation.update();
+      danceAnimation.update();
+      
 
-      /*
-      switch (state) {
-        case IDLE:
-          break;;
-        case DANCE:
-          dance();
-          break;;
-        case TEST:
-          idle();
-          break;;
-        case MANUAL:
-          break;;
-        default:
-          Serial << "Not able to execute state " << state << endl;
-          state = IDLE;
-      }
-      */
+
+
+
     }
 };
 

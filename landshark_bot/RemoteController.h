@@ -74,13 +74,24 @@ class RemoteController {
     }
 
     bool isIdle() {
-      return _lastPress > 10000;
+      if ( _lastPress > 10000) {
+        //just to be safe, hard reset our controller state
+        _control = {false, false, false, false, false, false};
+        return true;
+      }
+      else {
+        return false;
+      }
     }
+
     bool isActive() {
       return !isIdle();
     }
     void  setButton(String button, String value) {
       bool tvalue = truthy(value);
+
+      //reset our active button timer
+      _lastPress = 0;
 
       Serial << "Button " << button << " has been " << (tvalue ? "pressed" : "released") << endl;
       if (     button == "up") {
@@ -97,7 +108,7 @@ class RemoteController {
       }
       else if (button == "right") {
         _control.right = tvalue;
-        Serial << "Portwise!" << endl;
+        Serial << "Port!" << endl;
       }
       else if (button == "bite") {
         _control.bite = tvalue;

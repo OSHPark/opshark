@@ -17,6 +17,8 @@
 #include "RemoteController.h"
 #include "SharkBot.h"
 
+//const char *ssid =	"oshpark opsharks";		// cannot be longer than 32 characters!
+//const char *pass =	"";		//
 
 const char *ssid =	"HOME-1972";		// cannot be longer than 32 characters!
 const char *pass =	"9BC5A011D3345830";		//
@@ -47,7 +49,7 @@ void callback(const MQTT::Publish& pub) {
   //trip the last bit of the topic to get the button
   topic = topic.substring(topic.lastIndexOf('/') + 1);
 
-  //The remote class will handle all of the button tracking. 
+  //The remote class will handle all of the button tracking.
   remote.setButton(topic, msg);
 }
 
@@ -56,7 +58,7 @@ MQTT::Connect mqtt_connect = MQTT::Connect("landshark1")
                              .set_will("/landshark/1/status", "Shark 1 offline")
                              .set_keepalive(5);
 
-MQTT::Subscribe mqtt_subs = MQTT::Subscribe("/landshark/1/controller/+")
+MQTT::Subscribe mqtt_subs = MQTT::Subscribe("/landshark/1/input/+")
                             //.add_topic("/landshark/1/jabber");
                             ;
 
@@ -67,7 +69,7 @@ elapsedMillis heartbeat;
 void setup()
 {
   // Setup console
-  Serial.begin(9600);
+  Serial.begin(115200);
   delay(10);
 
   Serial << "Shark 1 cbooting " << endl;
@@ -119,30 +121,31 @@ void loop()
     Serial << "Lost Wifi: Restarting at time" << heartbeat << endl;
     ESP.reset();
   }
-  
+
   //
   //Now, do some clever things with the shark! :D
   //
-  
+
   //If no one is around, do something reasonable and/or cool.
-  if(true || remote.isIdle()){
+  if (remote.isIdle()) {
     shark.idle();
   }
-  else{
+  else {
     shark.notidle();
+    shark.manual(remote.controllerState());
   }
-  
-  
-  //This is the main shark logic, which goes through it's state machine and controlls the physical shark! 
-  shark.update();
-  
 
-  if(digitalRead(0)==LOW){
-     shark.disable();
-     while(1){
-       delay(200);
-       ESP.deepSleep(5000, WAKE_RF_DEFAULT);
-     }  
-   }
+
+  //This updates any ongoing animations
+  shark.update();
+
+
+  if (digitalRead(0) == LOW) {
+    shark.disable();
+    while (1) {
+      delay(200);
+      ESP.deepSleep(5000, WAKE_RF_DEFAULT);
+    }
+  }
 }
 

@@ -104,6 +104,11 @@ class Animation {
         //A list of 10 items results in _numSteps of 10. 
         // However we use lookahead logic, which means that i+1 must yield a value of 9 or less, so i+1 must be 10-1 or less
         // This condition happens when i above loops over bad values, or if we simply full the entire buffer
+        
+        //TODO: This whole check is really wonky and inaccurate, and needs to be fixed. 
+        // Animations that run over a reset time RESET get stopped instead of resetting
+        //WORKAROUND: Always give RESET instructions a very large time, which will always cause it to behave immediately after
+        // prior instructions (which is inaccurate, since the function should simply reset at the indicated time)
         stop();
         return true;
       }
@@ -145,6 +150,7 @@ class Animation {
             break;;
           case RESET:
             reset();
+            start();
             break;;
 
           default:
