@@ -20,9 +20,9 @@ ServoPlus driveright;
 
 AnimationStep idleFinsAnimation[10] = {
   {000, LINE, {80, 80}},
-  {1000, LINE, {90, 90}},
+  {1000, LINE, {100, 100}},
   {2000, LINE, {80, 80}},
-  {5000, RESET, {85, 85}},
+  {5000, RESET, {80, 80}},
   {3000, RESET, {85, 85}},
 };
 void idleFinsFunction(AnimationStep shark) {
@@ -37,7 +37,7 @@ AnimationStep idleTailAnimation[10] = {
   {2000, LINE, {105}},
   {2500, LINE, {90}},
   {2501, RESET, {75}},
-  {3000, RESET, {75}},
+  {4000, RESET, {75}},
 };
 
 void idleTailFunction(AnimationStep shark) {
@@ -47,9 +47,9 @@ Animation idleTail(idleTailAnimation, idleTailFunction);
 
 //This function is oddly named due to existing things. Ugly, but works
 AnimationStep biteAnimationSequence[10] = {
-  {0, LINE, {90}},  //open mouth
-  {200, LINE, {45}},  //will be restarted and looped here
-  {100, LINE, {90}},  //End function by closing mouth
+  {0, PAUSE, {120}},  //open mouth
+  {200, LINE, {120}},  //will be restarted and looped here
+  {300, LINE, {90}},  //End function by closing mouth
 };
 
 void biteFunction(AnimationStep shark) {
@@ -59,9 +59,13 @@ Animation biteAnimation(biteAnimationSequence, biteFunction);
 
 
 AnimationStep danceSequence[10] = {
-  {0, PAUSE, {0,90,45}},  //left fin down, right fin up, tail to left , 
-  {0, PAUSE, {90,0,135}},  //left fin down, right fin up, tail to left , 
-  {200, PAUSE, {45}},  //left fin up , right fin down, tail to right 
+  {0, PAUSE, {0, 90, 45}}, //left fin down, right fin up, tail to left ,
+  {500, PAUSE, {10, 80, 35}}, //left fin down, right fin up, tail to left ,
+  {700, PAUSE, {0, 90, 45}}, //left fin down, right fin up, tail to left ,
+  {1000, LINE, {90, 0, 135}}, //left fin down, right fin up, tail to left ,
+  {1500, PAUSE, {80, 10, 125}}, //left fin down, right fin up, tail to left ,
+  {1700, PAUSE, {90, 0, 135}}, //left fin down, right fin up, tail to left ,
+  {2500, PAUSE, {45}},
 
 };
 
@@ -107,17 +111,25 @@ class Sharkbot {
         Serial.println("Starting Idle animations");
         idleFin.reset();
         idleFin.start();
+
       }
       if (! idleTail.isEnabled()) {
         Serial.println("Starting Idle animations");
         idleTail.reset();
         idleTail.start();
       }
+
+      driveright.write(0);
+      driveleft.write(0);
     }
 
     void notidle() {
       idleFin.stop();
       idleFin.stop();
+      leftfin.write(90);
+      rightfin.write(90);
+      tailfin.write(90);
+
     }
 
     void balance() {
@@ -130,16 +142,23 @@ class Sharkbot {
 
       rightfin.restrictMapped(80, 110);
 
-      bite.restrict(70,110); //currently not allowed to move
+      bite.restrict(70, 110); //currently not allowed to move
 
       tailfin.restrict(60, 120);
 
-      driveleft.restrict(85, 95);
-      driveright.restrict(85, 95);
+      driveleft.mirror();
+      driveleft.restrictMapped(80, 105);
+      driveleft.map(0, 180, -90, 90);
+
+      driveright.restrictMapped(80, 105);
+      driveright.map(0, 180, -90, 90);
 
       //add some shark specific tuning parameters
       if (address = 1) {
         tailfin.offset(5);
+
+        driveright.offset(0);
+
       }
       else if (address == 2) {
 
@@ -167,15 +186,8 @@ class Sharkbot {
       rightfin.write(90);
       bite.write(90);
       tailfin.write(90);
-      //driveleft.write(90);
-      //driveright.write(90);
-
 
       state = IDLE;
-    };
-
-    void drive() {
-
     };
 
 
@@ -184,65 +196,103 @@ class Sharkbot {
       notidle();
 
       if (control.up) {
-        driveleft.write(driveleft.read() + 1);
-        driveright.write(driveright.read() + 1);
+        //driveleft.write(driveleft.read() + 10);
+        //driveright.write(driveright.read() + 10);
+        driveleft.write(20);
+        driveright.write(20);
+        Serial.println("++");
       }
       else if (control.left) {
-        driveleft.write(driveleft.read() - 1);
-        driveright.write(driveright.read() + 1);
+        //driveleft.write(driveleft.read() - 5);
+        //driveright.write(driveright.read() + 10);
+        driveleft.write(5);
+        driveright.write(20);
+        Serial.println("+-");
       }
       else if (control.right) {
-        driveleft.write(driveleft.read() + 1);
-        driveright.write(driveright.read() - 1);
+        //driveleft.write(driveleft.read() + 10);
+        //driveright.write(driveright.read() - 5);
+        driveleft.write(20);
+        driveright.write(5);
+       Serial.println("-+");
       }
-      else if (control.down) {
-        driveleft.write(driveleft.read() - 1);
-        driveright.write(driveright.read() - 1);
-      }
-      else { //Straigten out and slow down
 
+      else if (control.down) {
+        driveleft.write(-10);
+        driveright.write(-10);
+        
+        
+        /*
+        //Brake if we're going forward
+        if (driveleft.read() > 0  || driveright.read() > 0) {
+          driveleft.write(0);
+          driveright.write(0);
+          Serial.println("XX");
+        }
+        //Otherwise, back up a bit
+        else {
+          driveleft.write(driveleft.read() - 1);
+          driveright.write(driveright.read() - 1);
+          Serial.println("--");
+        }
+        //*/
+      }
+      else { 
+          driveleft.write(0);
+          driveright.write(0);
+         /* 
+        //Straigten out and slow down
         if ( driveleft.read() > driveright.read() ) {
           driveleft.write(driveleft.read() - 1);
-          driveleft.write(driveright.read() + 1);
-        }
+          driveright.write(driveright.read() + 1);
+          Serial.println("+-");
 
+        }
         else if (driveleft.read() < driveright.read() ) {
           driveleft.write(driveleft.read() + 1) ;
-          driveleft.write(driveright.read() - 1) ;
+          driveright.write(driveright.read() - 1) ;
+          Serial.println("+-");
         }
-        //else, equal, do nothing!
+        //else, equal, don't adjust them!
 
         //slow doooown the left
         if ( driveleft.read() > 0) {
           driveleft.write(driveleft.read() - 2);
+          Serial.print("-");
+
         }
         else if (driveleft.read() < 0) {
-          driveleft.write(driveleft.read() + 1);
+          driveleft.write(driveleft.read() + 2);
+          Serial.print("+");
 
         }
-
         //slooow down the right
         if ( driveright.read() > 0) {
           driveright.write(driveright.read() - 2);
-        }
-        else if (driveright.read() < 0) {
-          driveright.write(driveright.read() + 1);
+          Serial.println("-");
 
         }
+        else if (driveright.read() < 0) {
+          driveright.write(driveright.read() + 2);
+          Serial.println("+");
+
+        }
+        */
       }
 
 
 
       //BITE
-      if ( bite.read() > 0) {
+      if ( control.bite ) {
         //This one will hold the mouth open until you let go
         biteAnimation.reset();
         biteAnimation.start();
       }
       //DANCE PARTY
-      if ( driveright.read() > 0) {
+      if ( control.dance) {
         //This will only do a dance if it's not happening
-        if (danceAnimation.isEnabled() ) {
+        if (! danceAnimation.isEnabled() ) {
+          Serial.println("COMMENCING DANCE PARTY");
           danceAnimation.start();
           danceAnimation.reset();
         }
@@ -251,7 +301,6 @@ class Sharkbot {
 
       // This delay and button update speed on the controller will determine how fast the
       // accelleration profiles change
-      delay(50);
     }
 
 
@@ -265,10 +314,9 @@ class Sharkbot {
       biteAnimation.update();
       danceAnimation.update();
       
-
-
-
-
+      //Serial<<"L " <<  driveleft.read()  <<endl;
+      //Serial<<"R " <<  driveright.read()  <<endl;
+      //delay(50);
     }
 };
 
