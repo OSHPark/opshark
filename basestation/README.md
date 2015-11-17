@@ -1,3 +1,7 @@
+# BaseStation
+This is an ESP2866 board that controls three [Teensy-based capacitive controllers](../controller/)
+
+
 
 ## Wiring Diagram
 Wiring the SPI bus requires 4 connections between the ESP and Teensy. 
@@ -19,3 +23,4 @@ Wiring the SPI bus requires 4 connections between the ESP and Teensy.
 |              |                      |               |
 +--------------+                      +---------------+
 ```
+
