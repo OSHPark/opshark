@@ -37,6 +37,7 @@ See [BOM.txt](./BOM.txt) for the full component list from Eagle. Here's the nota
 - 2mm nuts
 - 2mm bolts
 - Various passives and headers
+- [Small nylon hinges](http://www.amazon.com/Du-Bro-Small-Nylon-Hinge-15-Pack/dp/B0006O4FYC/ref=pd_sim_21_1?ie=UTF8&dpID=310lU0qV%2BrL&dpSrc=sims&preST=_AC_UL160_SR160%2C160_&refRID=1N4D6JPY20T97VXT0CP7)
 
 All passives use a universal footprint optimized for 0603, but tolerant of 0402 and 0805 components. 
 
