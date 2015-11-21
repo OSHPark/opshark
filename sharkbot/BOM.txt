@@ -1,0 +1,49 @@
+Partlist
+
+Exported from brains.brd at 11/20/15 8:29 PM
+
+EAGLE Version 7.3.0 Copyright (c) 1988-2015 CadSoft
+
+Assembly variant: 
+
+Part     Value             Package                  Library                    Position (mil)        Orientation
+
+BAT2                       BATTERY-AA               SparkFun-Electromechanical (1000 1050)           MR270
+BITE                       1X03_LOCK                SparkFun-Connectors        (1950 1420)           R0
+BTN_PROG BUTTONPJRC        BUTTON-PJRC              tekdemo                    (740 1560)            R270
+BTN_RST  BUTTONPJRC        BUTTON-PJRC              tekdemo                    (740 1200)            R270
+C_5V     10uF              0402-0603-0805-UNIVERSAL tekdemo                    (1170 390)            R270
+C_BAT    10uF              0402-0603-0805-UNIVERSAL tekdemo                    (1000 510)            R0
+C_ESP1   1uF               0402-0603-0805-UNIVERSAL tekdemo                    (1880 1980)           R0
+C_ESP2   0.1uF             0402-0603-0805-UNIVERSAL tekdemo                    (1880 2070)           R0
+C_REG1   10uF              0402-0603-0805-UNIVERSAL tekdemo                    (1780 880)            R180
+C_REG2   1uF               0402-0603-0805-UNIVERSAL tekdemo                    (1780 790)            R180
+C_REGIN  10uF              0402-0603-0805-UNIVERSAL tekdemo                    (1780 570)            R0
+C_S1     220uF             1210                     tekdemo                    (2090 750)            R180
+C_S2     10uF              0402-0603-0805-UNIVERSAL tekdemo                    (2090 660)            R0
+C_S3     .1uF              0402-0603-0805-UNIVERSAL tekdemo                    (2090 590)            R0
+C_SUP    10uF              0402-0603-0805-UNIVERSAL tekdemo                    (1280 390)            R270
+DRV_L                      1X03_LOCK                SparkFun-Connectors        (1950 890)            R0
+DRV_R                      1X03_LOCK                SparkFun-Connectors        (1950 990)            R0
+FIN_L                      1X03_LOCK                SparkFun-Connectors        (1950 1090)           R0
+FIN_R                      1X03_LOCK                SparkFun-Connectors        (1950 1220)           R0
+FTDI                       1X06_LOCK                SparkFun-Connectors        (660 970)             R270
+IC_LIPO  MCP73871          QFN20                    adafruit                   (1180 630)            R180
+LED                        0402-0603-0805-UNIVERSAL tekdemo                    (1490 390)            R270
+LED_CHRG                   0402-0603-0805-UNIVERSAL tekdemo                    (1590 810)            R180
+LED_DONE                   0402-0603-0805-UNIVERSAL tekdemo                    (1590 720)            R180
+LED_PWR                    0402-0603-0805-UNIVERSAL tekdemo                    (1590 630)            R180
+R_BOOT                     0402-0603-0805-UNIVERSAL tekdemo                    (950 880)             R180
+R_LCHRG                    0402-0603-0805-UNIVERSAL tekdemo                    (1420 810)            R180
+R_LDONE                    0402-0603-0805-UNIVERSAL tekdemo                    (1420 720)            R180
+R_LED                      0402-0603-0805-UNIVERSAL tekdemo                    (1390 390)            R270
+R_LPWR                     0402-0603-0805-UNIVERSAL tekdemo                    (1420 630)            R180
+R_PD1    2k                0402-0603-0805-UNIVERSAL tekdemo                    (950 690)             R180
+R_PD2    100k              0402-0603-0805-UNIVERSAL tekdemo                    (950 780)             R180
+R_PD3    150k              0402-0603-0805-UNIVERSAL tekdemo                    (1420 900)            R0
+R_RST                      0402-0603-0805-UNIVERSAL tekdemo                    (950 960)             R180
+TAIL                       1X03_LOCK                SparkFun-Connectors        (1950 1320)           R0
+UART_X   UART_SWITCHER0603 UART_SWITCHER_0603       tekdemo                    (1300 1400)           MR270
+VREG_3V  MC1703T-3v0       SOT23                    tekdemo                    (1780 680)            R90
+WS_OUT                     1X03_LOCK                SparkFun-Connectors        (1950 500)            R0
+X1                         ESP-12                   adafruit                   (1360 1370)           R90
