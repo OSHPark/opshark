@@ -18,6 +18,8 @@ The chassis mechanics are still a bit undefined, and a bit erratic. However, the
 
 The Arduino sketch is still in a bit of a mess, but can read incoming controller data and react. However, the Animation and ServoPlus libraries have some bugs and needs to be rewritten/updated in order for the shark to react correctly.
 
+![Shark posing][./images/2015-09-24 01.39.59.jpg]
+
 # Required Utilities
 ## Software
 [Arduino 1.65](https://www.arduino.cc/en/Main/Software) 
