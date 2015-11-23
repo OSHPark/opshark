@@ -10,8 +10,8 @@ Part     Value             Package                  Library                    P
 
 BAT2                       BATTERY-AA               SparkFun-Electromechanical (1000 1050)           MR270
 BITE                       1X03_LOCK                SparkFun-Connectors        (1950 1420)           R0
-BTN_PROG BUTTONPJRC        BUTTON-PJRC              tekdemo                    (740 1560)            R270
-BTN_RST  BUTTONPJRC        BUTTON-PJRC              tekdemo                    (740 1200)            R270
+BTN_PROG BUTTONPJRC        KMR432GLFS               tekdemo                    (740 1560)            R270
+BTN_RST  BUTTONPJRC        KMR432GLFS               tekdemo                    (740 1200)            R270
 C_5V     10uF              0402-0603-0805-UNIVERSAL tekdemo                    (1170 390)            R270
 C_BAT    10uF              0402-0603-0805-UNIVERSAL tekdemo                    (1000 510)            R0
 C_ESP1   1uF               0402-0603-0805-UNIVERSAL tekdemo                    (1880 1980)           R0
