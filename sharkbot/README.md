@@ -26,8 +26,8 @@ The images in [references](./references) are copied from the tutorial for practi
 See [BOM.txt](./BOM.txt) for the full component list from Eagle. Here's the notable/major components: 
 
 - [ESP12E](https://www.adafruit.com/products/2491)
-- [Brains PCB](oshpark.com/import?url=https://github.com/oshpark/OPShark/sharkbot/eagle-files/brains.brd)
-- [Fin  PCBs](oshpark.com/import?url=https://github.com/oshpark/OPShark/sharkbot/eagle-files/fins.brd) and [Chassis  PCBs](oshpark.com/import?url=https://github.com/oshpark/OPShark/sharkbot/eagle-files/chassis.brd)
+- Brains PCB. 
+- Either Fin and Chassis  PCBs, or laser-cut equivilents (will have no place to mount neopixels)
 - [Pair of AA Sized Lipo battery](https://www.sparkfun.com/products/7949)
 - [MCP73871 LIPO battery management IC](http://www.digikey.com/product-detail/en/MCP73871-2CCI%2FML/MCP73871-2CCI%2FML-ND/1680971)
 - [MC1703T 3.0V SOT23 Voltage ](http://www.digikey.com/product-detail/en/MCP1703T-3002E%2FCB/MCP1703T-3002E%2FCBCT-ND/1776944)
